@@ -1,4 +1,4 @@
-# Astro-Physics CP4-5 dust covers
+# Astro-Physics CP4 and CP5 dust covers
 
 by C.Y. Tan 2023
 
