@@ -33,14 +33,14 @@ IBox_len_z = 20; //mm
 
 // outside dimensions of box
 
-Box_wall_t = 2; //mm, wall thickness
+Box_wall_t = 3; //mm, wall thickness
 
 Box_len_x = IBox_len_x + 2*Box_wall_t; //mm
 Box_len_y = IBox_len_y + 2*Box_wall_t; //mm
 Box_len_z = IBox_len_z + 2*Box_wall_t; //mm
 
 // partition wall dimensions
-Box_partition_len_y = 68.2 + Box_wall_t; //mm
+Box_partition_len_y = 70.2 + Box_wall_t; //mm 
 Box_partition_len_z = 10; //mm
 
 // partition wall that separates the motor and encoder cables from the other sockets
