@@ -25,13 +25,13 @@
 $fn=100;
 
 // inside dimensions of box
-IBox_len_x = 163; // mm
-IBox_len_y = 128; // mm
-IBox_len_z = 20; //mm
+IBox_len_x = 163.5; // mm
+IBox_len_y = 129; // mm
+IBox_len_z = 20; //mm 
 
 // outside dimensions of box
 
-Box_wall_t = 2; //mm, wall thickness
+Box_wall_t = 3; //mm, wall thickness
 
 Box_len_x = IBox_len_x + 2*Box_wall_t; //mm
 Box_len_y = IBox_len_y + 2*Box_wall_t; //mm
@@ -39,7 +39,8 @@ Box_len_z = IBox_len_z + 2*Box_wall_t; //mm
 
 // partition wall y position
 Box_partition_len_y = 68.2 + Box_wall_t; //mm
-Box_partition_len_z = 10; //mm
+Box_partition_len_z = 9;  //mm 
+Box_partition_wall_t = 2;
 
 // lips
 Top_lip = 5; //mm
@@ -55,19 +56,21 @@ module make_box()
   difference(){
     difference(){
       cube([Box_len_x, Box_len_y, Box_len_z], center= false);
+      
       translate([Box_wall_t, Box_wall_t, Box_wall_t])
         cube([IBox_len_x , IBox_len_y , IBox_len_z + 2*Box_wall_t], center=false);
     }
     // make the upper clearance hole
-    translate([Box_wall_t, Box_wall_t + Top_lip, -IBox_len_z/2])    
-      cube([IBox_len_x, Box_partition_len_y - Top_lip, IBox_len_z], center=false);
+    translate([Box_wall_t, Box_wall_t + Top_lip, -IBox_len_z/2])        
+      cube([IBox_len_x, Box_partition_len_y - Top_lip-Box_partition_wall_t/2
+	    , 4*IBox_len_z], center=false); 
   }
 }
 
 module make_partition()
 {
   translate([0, Box_partition_len_y, 0])
-    cube([Box_len_x, Box_wall_t, Box_partition_len_z], center=false);
+    cube([Box_len_x, Box_partition_wall_t, Box_partition_len_z], center=false);
 }
 
 module make_flat_corners()
@@ -105,8 +108,10 @@ module make_flat_corners()
 
 
 union(){
- difference(){  
-   make_box();
+ difference(){
+   difference(){
+     make_box();
+   }
    make_flat_corners();
  }  
     make_partition();
